@@ -1,0 +1,31 @@
+.wrapper {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.container {
+  height: 75%;
+  width: 80%;
+  margin: 0 auto;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+}
+
+.books-container {
+  width: 60%;
+  height: 100%;
+  background-color: orange;
+}
+
+.serch-field {
+  height: 10%;
+  width: 100%;
+  background-color: orangered;
+}
