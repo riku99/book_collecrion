@@ -15,17 +15,69 @@
   top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: black;
 }
 
 .books-container {
   width: 60%;
   height: 100%;
-  background-color: orange;
 }
 
 .serch-field {
   height: 10%;
   width: 100%;
-  background-color: orangered;
+  position: relative;
+}
+
+.serch-set {
+  width: 80%;
+  text-align: center;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.serch-form {
+  height: 4vh;
+  width: 18vw;
+  color: #161515;
+  font-size: 14px;
+  border: none;
+  border: solid 1px gray;
+  border-radius: 30px;
+  outline: none;
+}
+
+.serch-button {
+  margin-left: 10px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  background-color: #98e098;
+  border-radius: 30px;
+  outline: none;
+}
+
+.books {
+  overflow: scroll;
+  height: 90%;
+}
+
+.book {
+  margin-bottom: 30px;
+  font-family: "ヒラギノ角ゴシック";
+  display: flex;
+  justify-content: space-around;
+}
+
+.book .introduce {
+  color: #686464;
+}
+
+.book .introduce .authors {
+  margin-top: 20px;
+}
+
+.book .introduce .title {
+  font-size: 25px;
 }

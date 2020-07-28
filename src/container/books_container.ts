@@ -8,6 +8,7 @@ import Books from "../components/books";
 const mapStateToProps = (state: initialState) => {
   return {
     serchedBooks: state.serchedBooks,
+    message: state.message,
   };
 };
 

@@ -16,10 +16,17 @@ export let getGoogleBooksApi = async (keyword: string) => {
   let books_data = [];
 
   for (let i = 0; i < response.data.items.length && i < 20; i++) {
+    let title = response.data.items[i].volumeInfo.title;
+    let authors = response.data.items[i].volumeInfo.authors
+      ? response.data.items[i].volumeInfo.authors
+      : null;
+    let image = response.data.items[i].volumeInfo.imageLinks
+      ? response.data.items[i].volumeInfo.imageLinks.smallThumbnail
+      : null;
     let book = {
-      title: response.data.items[i].volumeInfo.title,
-      auhors: response.data.items[i].volumeInfo.authors,
-      image: response.data.items[i].volumeInfo.imageLinks.smallThumbnail,
+      title: title,
+      authors: authors,
+      image: image,
     };
     books_data.push(book);
   }
