@@ -9,6 +9,23 @@ export const getBooks = {
   }),
 };
 
+export const registerBooks = {
+  register: (data: {
+    title: string;
+    authors: string[] | null;
+    image: string | null;
+    memo: string;
+  }) => ({
+    type: "REGISTER_BOOKS",
+    data: {
+      title: data.title,
+      authors: data.authors,
+      image: data.image,
+      memo: data.memo,
+    },
+  }),
+};
+
 export type getBooksType =
   | ReturnType<typeof getBooks.get>
   | ReturnType<typeof getBooks.success>

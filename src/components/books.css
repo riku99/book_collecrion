@@ -50,6 +50,7 @@
 
 .serch-button {
   margin-left: 10px;
+  padding: 3px 7px;
   color: white;
   font-weight: bold;
   border: none;
@@ -64,14 +65,15 @@
 }
 
 .book {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   font-family: "ヒラギノ角ゴシック";
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .book .introduce {
   color: #686464;
+  width: 100%;
 }
 
 .book .introduce .authors {
@@ -80,4 +82,30 @@
 
 .book .introduce .title {
   font-size: 25px;
+  width: 80%;
+}
+
+.register-form textarea {
+  display: block;
+  height: 80px;
+  width: 80%;
+  font-size: 14px;
+  color: hsl(0, 0%, 22%);
+  border: none;
+  border: solid 1px rgb(223, 223, 223);
+  outline: none;
+}
+
+.register-form {
+  margin-top: 5%;
+}
+
+.register-form button {
+  background-color: hsl(143, 100%, 36%);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: 8px;
+  outline: none;
 }

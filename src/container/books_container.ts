@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-import { getBooks } from "../actions/books_action";
+import { getBooks, registerBooks } from "../actions/books_action";
 import { initialState } from "../reducer";
 import Books from "../components/books";
 
@@ -14,6 +15,20 @@ const mapStateToProps = (state: initialState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   getBooks: (keyword: string) => dispatch(getBooks.get(keyword)),
+  registerBooks: (
+    title: string,
+    authors: string[] | null,
+    image: string | null,
+    memo: string
+  ) =>
+    dispatch(
+      registerBooks.register({
+        title: title,
+        authors: authors,
+        image: image,
+        memo: memo,
+      })
+    ),
 });
 
 export type BooksPropsType = ReturnType<typeof mapStateToProps> &

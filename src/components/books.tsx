@@ -3,8 +3,24 @@ import React, { FC, useState } from "react";
 import "./books.css";
 import { BooksPropsType } from "../container/books_container";
 
-const Books: FC<BooksPropsType> = ({ serchedBooks, message, getBooks }) => {
+const Books: FC<BooksPropsType> = ({
+  serchedBooks,
+  message,
+  getBooks,
+  registerBooks,
+}) => {
   const [keyword, changeKeyword] = useState("");
+  const [memos, changeMemo] = useState(() => {
+    if (serchedBooks) {
+      let o: { [memo: string]: string } = {};
+      for (let i = 0; i < serchedBooks.length; i++) {
+        o["memo" + i] = "";
+      }
+      return o;
+    }
+    return null;
+  });
+
   return (
     <>
       <div className="wrapper">
@@ -35,7 +51,7 @@ const Books: FC<BooksPropsType> = ({ serchedBooks, message, getBooks }) => {
               {serchedBooks
                 ? serchedBooks.map((book, index) => {
                     return (
-                      <div className="book" key={index}>
+                      <div className="book" key={index.toString()}>
                         <div className="introduce">
                           <div className="title">{book.title}</div>
                           {book.authors ? (
@@ -45,6 +61,37 @@ const Books: FC<BooksPropsType> = ({ serchedBooks, message, getBooks }) => {
                           ) : (
                             <div className="authors">作者不明</div>
                           )}
+                          <div className="registerBooks">
+                            <div className="register-form">
+                              <textarea
+                                value={
+                                  memos ? memos["memo" + index] : undefined
+                                }
+                                placeholder="メモやコメントを残す"
+                                onChange={(e) => {
+                                  changeMemo({
+                                    ...memos,
+                                    ["memo" + index]: e.target.value,
+                                  });
+                                }}
+                              ></textarea>
+                            </div>
+                            <div className="register-form">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  registerBooks(
+                                    book.title,
+                                    book.authors,
+                                    book.image,
+                                    memos!["memo" + index]
+                                  );
+                                }}
+                              >
+                                MyBookに登録
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         {book.image ? (
                           <img src={book.image} alt=""></img>
