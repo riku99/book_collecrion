@@ -1,0 +1,26 @@
+.mybooks {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.mybook {
+  width: 20%;
+  height: 50%;
+  overflow: scroll;
+  text-align: center;
+}
+
+.image {
+  height: 70%;
+}
+
+.introduce .title {
+  color: rgb(48, 53, 71);
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.introduce .authors {
+  color: #686464;
+}

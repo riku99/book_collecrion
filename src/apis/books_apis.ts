@@ -33,3 +33,56 @@ export let getGoogleBooksApi = async (keyword: string) => {
 
   return books_data;
 };
+
+export let registerBookToRailsApi = async (data: {
+  title: string;
+  authors: string[] | null;
+  image: string | null;
+  memo: string;
+}) => {
+  let response = await axios.post(
+    "http://localhost:4000/api/v1/registerBooks",
+    {
+      book: {
+        title: data.title,
+        authors: data.authors?.toString(),
+        image: data.image,
+        memo: data.memo,
+      },
+    }
+  );
+
+  if (response.data.status !== 200) {
+    throw Error("エラーが発生しました");
+  }
+
+  return response.data;
+};
+
+export let getMyBooksToRailsApi = async () => {
+  let response = await axios.get("http://localhost:4000/api/v1/mybooks");
+
+  if (response.status !== 200) {
+    throw new Error("エラーが発生しました");
+  }
+
+  if (response.data.length !== 0) {
+    let d = response.data;
+    let mybooks = [];
+    for (let i = 0; i < response.data.length; i++) {
+      let mybook = {
+        id: d[i].id,
+        title: d[i].title,
+        authors: d[i].authors,
+        image: d[i].image ? d[i].image : null,
+        memo: d[i].memo,
+        date: d[i].created_at,
+      };
+      mybooks.push(mybook);
+    }
+    console.log(mybooks);
+    return mybooks;
+  }
+
+  return null;
+};
