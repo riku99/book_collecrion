@@ -97,7 +97,8 @@ const Books: FC<BooksPropsType> = ({
                 })
               : null}
           </div>
-          <div>{message && message.error ? message.error : null}</div>
+          {message && message.error ? <div>{message.error}</div> : null}
+          {message && message.success ? <div>{message.success}</div> : null}
         </div>
         <div className="others">
           <Link className="link" to="/mybooks">

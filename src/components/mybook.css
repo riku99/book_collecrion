@@ -1,0 +1,55 @@
+.one-mybook {
+  width: 60%;
+  color: #686464;
+}
+
+.one-mybook .title {
+  color: rgb(48, 53, 71);
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.one-mybook .authors {
+  color: #686464;
+  margin-top: 8px;
+}
+
+.one-mybook .memo {
+  display: flex;
+}
+
+.one-mybook .memo-sbj {
+  color: rgb(48, 53, 71);
+  font-weight: bold;
+}
+
+.one-mybook .memo-content {
+  margin-left: 5%;
+  white-space: pre-wrap;
+}
+
+.one-mybook .date {
+  display: flex;
+}
+
+.one-mybook .date-sbj {
+  color: rgb(48, 53, 71);
+  font-weight: bold;
+}
+
+.one-mybook .date-content {
+  margin-left: 5%;
+}
+
+.one-mybook .operation {
+  display: flex;
+  margin-top: 10px;
+}
+
+.one-mybook .operation button {
+  background-color: inherit;
+  border: none;
+  color: #2271b1;
+  margin-right: 10%;
+}

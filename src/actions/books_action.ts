@@ -3,9 +3,9 @@ export const getBooks = {
   success: (
     data: { title: string; authors: string[] | null; image: string | null }[]
   ) => ({ type: "SUCCESS_GET_BOOK" as const, data: data }),
-  error: (message: { error: string }) => ({
-    type: "FAILER_GET_BOOK" as const,
-    message: message,
+  error: (message: string) => ({
+    type: "FAILER_MESSAGE" as const,
+    message: { error: message },
   }),
 };
 
@@ -24,6 +24,14 @@ export const registerBooks = {
       memo: data.memo,
     },
   }),
+  success: (message: string) => ({
+    type: "SUCCESS_MESSAGE" as const,
+    message: { success: message },
+  }),
+  error: (message: string) => ({
+    type: "FAILER_MESSAGE" as const,
+    message: { error: message },
+  }),
 };
 
 export const getMyBooks = {
@@ -40,14 +48,42 @@ export const getMyBooks = {
         }[]
       | null
   ) => ({ type: "SUCCESS_GET_MYBOOKS" as const, mybooks: data }),
-  error: (e: string) => ({ type: "FAILER_GET_MYBOOK" as const }),
+  error: (message: string) => ({
+    type: "FAILER_MESSAGE" as const,
+    message: { error: message },
+  }),
 };
 
-export type getBooksType =
+export const getMyBook = {
+  get: (id: number) => ({ type: "GET_MYBOOK", id: id }),
+  success: (mybook: {
+    id: number;
+    title: string;
+    authors: string;
+    image: string;
+    memo: string;
+    date: string;
+  }) => ({
+    type: "SUCCESS_GETMYBOOK" as const,
+    mybook: mybook,
+  }),
+};
+
+type getBooksType =
   | ReturnType<typeof getBooks.get>
   | ReturnType<typeof getBooks.success>
   | ReturnType<typeof getBooks.error>;
 
-export type getMyBooksType =
+type getMyBooksType =
   | ReturnType<typeof getMyBooks.success>
   | ReturnType<typeof getMyBooks.error>;
+
+type registerBooksType = ReturnType<typeof registerBooks.success>;
+
+type getMyBookType = ReturnType<typeof getMyBook.success>;
+
+export type booksType =
+  | getBooksType
+  | getMyBooksType
+  | registerBooksType
+  | getMyBookType;

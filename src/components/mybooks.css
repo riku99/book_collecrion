@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .mybooks {
   display: flex;
   flex-wrap: wrap;
@@ -11,7 +15,7 @@
   text-align: center;
 }
 
-.image {
+.mybooks .image {
   height: 70%;
 }
 

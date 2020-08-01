@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 
-import { getBooksType, getMyBooksType } from "./actions/books_action";
+import { booksType } from "./actions/books_action";
 
 export type initialState = {
   serchedBooks:
@@ -16,15 +16,24 @@ export type initialState = {
         date: string;
       }[]
     | null;
+  myBook: {
+    id: number;
+    title: string;
+    authors: string;
+    image: string;
+    memo: string;
+    date: string;
+  } | null;
   message: { error?: string; success?: string; info?: string } | null;
 };
 
-type ActionType = getBooksType | getMyBooksType;
+type ActionType = booksType;
 
 const reducer: Reducer<initialState, ActionType> = (
   state = {
     serchedBooks: null,
     myBooks: null,
+    myBook: null,
     message: null,
   },
   action
@@ -34,15 +43,23 @@ const reducer: Reducer<initialState, ActionType> = (
       return { ...state, message: null, serchedBooks: action.data };
     }
 
-    case "FAILER_GET_BOOK": {
-      return { ...state, message: action.message };
-    }
-
     case "SUCCESS_GET_MYBOOKS": {
       return {
         ...state,
         myBooks: action.mybooks,
       };
+    }
+
+    case "SUCCESS_MESSAGE": {
+      return { ...state, message: action.message };
+    }
+
+    case "FAILER_MESSAGE": {
+      return { ...state, message: action.message };
+    }
+
+    case "SUCCESS_GETMYBOOK": {
+      return { ...state, myBook: action.mybook };
     }
 
     default: {

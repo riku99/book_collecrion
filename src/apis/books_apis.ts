@@ -52,8 +52,8 @@ export let registerBookToRailsApi = async (data: {
     }
   );
 
-  if (response.data.status !== 200) {
-    throw Error("エラーが発生しました");
+  if (response.status !== 200) {
+    throw new Error("エラーが発生しました");
   }
 
   return response.data;
@@ -85,4 +85,24 @@ export let getMyBooksToRailsApi = async () => {
   }
 
   return null;
+};
+
+export let getMyBookFromRailsApi = async (id: number) => {
+  let response = await axios(`http://localhost:4000/api/v1/mybooks/${id}`);
+
+  if (response.status !== 200) {
+    throw new Error("エラーが発生しました");
+  }
+
+  let data = response.data;
+  let mybook = {
+    id: data.id,
+    title: data.title,
+    authors: data.authors,
+    image: data.image,
+    memo: data.memo,
+    date: data.created_at,
+  };
+
+  return mybook;
 };
