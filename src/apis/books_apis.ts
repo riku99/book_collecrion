@@ -80,7 +80,6 @@ export let getMyBooksToRailsApi = async () => {
       };
       mybooks.push(mybook);
     }
-    console.log(mybooks);
     return mybooks;
   }
 
@@ -105,4 +104,14 @@ export let getMyBookFromRailsApi = async (id: number) => {
   };
 
   return mybook;
+};
+
+export const deleteMyBookToRailsApi = async (id: number) => {
+  let response = await axios.delete(
+    `http://localhost:4000/api/v1/mybooks/${id}`
+  );
+
+  if (response.status !== 200) {
+    throw new Error("エラーが発生しました");
+  }
 };

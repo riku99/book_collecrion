@@ -6,7 +6,7 @@ import "./mybooks.css";
 
 type MyBooksPropsType = MyBooksStateAndDispatchType;
 
-const MyBooks: FC<MyBooksPropsType> = ({ mybooks, getMyBooks }) => {
+const MyBooks: FC<MyBooksPropsType> = ({ mybooks, message, getMyBooks }) => {
   useEffect(getMyBooks, []);
   return (
     <>
@@ -31,6 +31,8 @@ const MyBooks: FC<MyBooksPropsType> = ({ mybooks, getMyBooks }) => {
           <p>登録されていません</p>
         )}
       </div>
+      {message && message.error ? <div>{message.error}</div> : null}
+      {message && message.success ? <div>{message.success}</div> : null}
     </>
   );
 };

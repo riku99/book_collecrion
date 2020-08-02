@@ -67,6 +67,23 @@ export const getMyBook = {
     type: "SUCCESS_GETMYBOOK" as const,
     mybook: mybook,
   }),
+  error: (e: string) => ({
+    type: "FAILER_MESSAGE" as const,
+    message: { error: e },
+  }),
+};
+
+export const deleteMyBook = {
+  delete: (id: number) => ({ type: "DELETE_MYBOOK" as const, id: id }),
+  success: (message: string) => ({
+    type: "SUCCESS_DELETE_MYBOOK" as const,
+    redirectToNewPage: true,
+    message: { success: message },
+  }),
+  error: (m: string) => ({
+    type: "FAILER_MESSAGE" as const,
+    message: { error: m },
+  }),
 };
 
 type getBooksType =
@@ -80,10 +97,17 @@ type getMyBooksType =
 
 type registerBooksType = ReturnType<typeof registerBooks.success>;
 
-type getMyBookType = ReturnType<typeof getMyBook.success>;
+type getMyBookType =
+  | ReturnType<typeof getMyBook.success>
+  | ReturnType<typeof getMyBook.error>;
+
+type deleteMyBookType =
+  | ReturnType<typeof deleteMyBook.success>
+  | ReturnType<typeof deleteMyBook.error>;
 
 export type booksType =
   | getBooksType
   | getMyBooksType
   | registerBooksType
-  | getMyBookType;
+  | getMyBookType
+  | deleteMyBookType;

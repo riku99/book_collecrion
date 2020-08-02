@@ -5,6 +5,7 @@ import {
   watchRegisterBook,
   watchGetMyBooks,
   watchGetMyBook,
+  watchDeleteMyBook,
 } from "./books_saga";
 
 export default function* rootSaga() {
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     watchRegisterBook(),
     watchGetMyBooks(),
     watchGetMyBook(),
+    watchDeleteMyBook(),
   ]);
 }

@@ -1,14 +1,34 @@
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router";
 
 import { MyBookStateAndDispatchType } from "../container/mybook_container";
 import "./mybook.css";
 
-const MyBook: FC<MyBookStateAndDispatchType> = ({ mybook, getMyBook }) => {
+const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({
+  history,
+  mybook,
+  message,
+  redirectToNewPage,
+  getMyBook,
+  deleteMyBook,
+  changeRedirectState,
+}) => {
   let { id } = useParams();
+
+  let redirectToMybooks = () => {
+    if (redirectToNewPage) {
+      history.replace("/mybooks");
+      changeRedirectState();
+    }
+  };
+
   useEffect(() => {
     getMyBook(id);
   }, [getMyBook, id]);
+
+  useEffect(redirectToMybooks, [redirectToNewPage]);
+
   return (
     <>
       {mybook ? (
@@ -27,13 +47,25 @@ const MyBook: FC<MyBookStateAndDispatchType> = ({ mybook, getMyBook }) => {
             <p className="date-content">{mybook.date}</p>
           </div>
           <div className="operation">
-            <button className="delete-button">削除する</button>
+            <button
+              className="delete-button"
+              onClick={() => {
+                let r = window.confirm("削除しますか?");
+                if (r) {
+                  deleteMyBook(mybook.id);
+                }
+              }}
+            >
+              削除する
+            </button>
             <button>メモを編集する</button>
           </div>
         </div>
       ) : null}
+      {message && message.error ? <div>{message.error}</div> : null}
+      {message && message.success ? <div>{message.success}</div> : null}
     </>
   );
 };
 
-export default MyBook;
+export default withRouter(MyBook);

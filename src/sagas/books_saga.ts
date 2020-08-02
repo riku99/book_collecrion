@@ -5,15 +5,17 @@ import {
   registerBooks,
   getMyBooks,
   getMyBook,
+  deleteMyBook,
 } from "../actions/books_action";
 import {
   getGoogleBooksApi,
   registerBookToRailsApi,
   getMyBooksToRailsApi,
   getMyBookFromRailsApi,
+  deleteMyBookToRailsApi,
 } from "../apis/books_apis";
 
-function* runGetBook(action: ReturnType<typeof getBooks.get>) {
+function* runGetBooks(action: ReturnType<typeof getBooks.get>) {
   try {
     let books_data = yield call(getGoogleBooksApi, action.keyword);
     yield put(getBooks.success(books_data));
@@ -45,11 +47,23 @@ function* runGetMyBook(action: ReturnType<typeof getMyBook.get>) {
   try {
     let response = yield getMyBookFromRailsApi(action.id);
     yield put(getMyBook.success(response));
-  } catch (e) {}
+  } catch (e) {
+    yield put(getMyBook.error(e.message));
+  }
+}
+
+function* runDeleteMyBook(action: ReturnType<typeof deleteMyBook.delete>) {
+  try {
+    yield call(deleteMyBookToRailsApi, action.id);
+    yield put(deleteMyBook.success("削除しました"));
+  } catch (e) {
+    yield put(deleteMyBook.error(e.message));
+    console.log(e.message);
+  }
 }
 
 export function* watchGetBooks() {
-  yield takeLatest("GET_BOOKS", runGetBook);
+  yield takeLatest("GET_BOOKS", runGetBooks);
 }
 
 export function* watchRegisterBook() {
@@ -62,4 +76,8 @@ export function* watchGetMyBooks() {
 
 export function* watchGetMyBook() {
   yield takeLatest("GET_MYBOOK", runGetMyBook);
+}
+
+export function* watchDeleteMyBook() {
+  yield takeLatest("DELETE_MYBOOK", runDeleteMyBook);
 }

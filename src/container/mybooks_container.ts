@@ -7,6 +7,7 @@ import { initialState } from "../reducer";
 
 const mapStateToProps = (state: initialState) => ({
   mybooks: state.myBooks,
+  message: state.message,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
