@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./books.css";
 import { BooksPropsType } from "../container/books_container";
+import "./books.css";
 
 const Books: FC<BooksPropsType> = ({
   serchedBooks,
@@ -27,9 +27,11 @@ const Books: FC<BooksPropsType> = ({
       <div className="books-page">
         <div className="books-container">
           <div className="serch-field">
-            <div className="serch-set">
-              <form>
+            <div className="serch-se">
+              <form data-testid="serch-set">
                 <input
+                  name="serch-set-form"
+                  data-testid="serch-set-form"
                   className="serch-form"
                   type="text"
                   value={keyword}
