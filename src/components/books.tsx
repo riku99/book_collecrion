@@ -27,11 +27,11 @@ const Books: FC<BooksPropsType> = ({
       <div className="books-page">
         <div className="books-container">
           <div className="serch-field">
-            <div className="serch-se">
-              <form data-testid="serch-set">
+            <div className="serch-set">
+              <form data-testid="search-form">
                 <input
-                  name="serch-set-form"
-                  data-testid="serch-set-form"
+                  name="keyword-form"
+                  data-testid="keyword-form"
                   className="serch-form"
                   type="text"
                   value={keyword}
@@ -45,15 +45,20 @@ const Books: FC<BooksPropsType> = ({
                   type="button"
                   value="検索"
                   onClick={() => getBooks(keyword)}
+                  data-testid="search-button"
                 />
               </form>
             </div>
           </div>
-          <div className="books">
+          <div className="books" data-testid="books">
             {serchedBooks
               ? serchedBooks.map((book, index) => {
                   return (
-                    <div className="book" key={index.toString()}>
+                    <div
+                      className="book"
+                      key={index.toString()}
+                      data-testid="book"
+                    >
                       <div className="introduce">
                         <div className="title">{book.title}</div>
                         {book.authors ? (
@@ -99,8 +104,12 @@ const Books: FC<BooksPropsType> = ({
                 })
               : null}
           </div>
-          {message && message.error ? <div>{message.error}</div> : null}
-          {message && message.success ? <div>{message.success}</div> : null}
+          {message && message.error ? (
+            <div data-testid="error-message">{message.error}</div>
+          ) : null}
+          {message && message.success ? (
+            <div data-testid="success-message">{message.success}</div>
+          ) : null}
         </div>
         <div className="others">
           <Link className="link" to="/mybooks">

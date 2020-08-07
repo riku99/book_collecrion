@@ -12,23 +12,25 @@ const mapStateToProps = (state: initialState) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  getBooks: (keyword: string) => dispatch(getBooks.get(keyword)),
-  registerBooks: (
-    title: string,
-    authors: string[] | null,
-    image: string | null,
-    memo: string
-  ) =>
-    dispatch(
-      registerBooks.register({
-        title: title,
-        authors: authors,
-        image: image,
-        memo: memo,
-      })
-    ),
-});
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    getBooks: (keyword: string) => dispatch(getBooks.get(keyword)),
+    registerBooks: (
+      title: string,
+      authors: string[] | null,
+      image: string | null,
+      memo: string
+    ) =>
+      dispatch(
+        registerBooks.register({
+          title: title,
+          authors: authors,
+          image: image,
+          memo: memo,
+        })
+      ),
+  };
+};
 
 export type BooksPropsType = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
