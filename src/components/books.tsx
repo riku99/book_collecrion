@@ -79,6 +79,7 @@ const Books: FC<BooksPropsType> = ({
                                   ["memo" + index]: e.target.value,
                                 });
                               }}
+                              data-testid="memo"
                             ></textarea>
                           </div>
                           <div className="register-form">
@@ -92,6 +93,7 @@ const Books: FC<BooksPropsType> = ({
                                   memos ? memos["memo" + index] : ""
                                 );
                               }}
+                              data-testid="register"
                             >
                               MyBookに登録
                             </button>

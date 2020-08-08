@@ -5,6 +5,7 @@ import { createStore } from "redux";
 import reducer from "../reducer";
 
 import Books from "../container/books_container";
+import { customState } from "./test-utils";
 
 describe("<Books />", () => {
   test("serch-formにkeyword-formがあり、valueが''である", async () => {
@@ -63,7 +64,7 @@ describe("<Books />", () => {
     expect(successMessageEle.textContent).toBe("サクセスメッセージ");
   });
 
-  test("検索ボタンのクリックでアクションが返されること", async () => {
+  test("検索ボタンを押すとアクションがdispatchされる", async () => {
     const store = createStore(reducer);
     store.dispatch = jest.fn();
     const { findByTestId } = render(<Books />, { store: store });
@@ -74,6 +75,54 @@ describe("<Books />", () => {
     expect(store.dispatch).toHaveBeenCalledWith({
       type: "GET_BOOKS",
       keyword: "マンキュー経済学",
+    });
+  });
+
+  test("メモを入力できる", async () => {
+    const searchedBooks = [
+      {
+        title: "マンキュー経済学",
+        authors: ["N.グレゴリー マンキュー"],
+        image:
+          "http://books.google.com/books/content?id=PviOoAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      },
+    ];
+    const { findByTestId } = render(<Books />, {
+      testInitialState: { serchedBooks: searchedBooks },
+    });
+    const memoField = await findByTestId("memo");
+    fireEvent.change(memoField, { target: { value: "テストメモ" } });
+    expect(memoField).toHaveValue("テストメモ");
+  });
+
+  test("登録ボタンを押すとアクションがdispatchされる", async () => {
+    const searchedBooks = [
+      {
+        title: "マンキュー経済学",
+        authors: ["N.グレゴリー マンキュー"],
+        image:
+          "http://books.google.com/books/content?id=PviOoAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      },
+    ];
+    const store = createStore(
+      reducer,
+      customState({ serchedBooks: searchedBooks })
+    );
+    store.dispatch = jest.fn();
+    const { findByTestId } = render(<Books />, { store: store });
+    const memoField = await findByTestId("memo");
+    fireEvent.change(memoField, { target: { value: "テストメモ" } });
+    const registerButton = await findByTestId("register");
+    fireEvent.click(registerButton);
+    expect(store.dispatch).toHaveBeenCalledWith({
+      type: "REGISTER_BOOKS",
+      data: {
+        title: "マンキュー経済学",
+        authors: ["N.グレゴリー マンキュー"],
+        image:
+          "http://books.google.com/books/content?id=PviOoAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        memo: "テストメモ",
+      },
     });
   });
 });

@@ -14,13 +14,15 @@ const MyBooks: FC<MyBooksPropsType> = ({ mybooks, message, getMyBooks }) => {
         {mybooks ? (
           mybooks.map((mybook) => {
             return (
-              <div className="mybook" key={mybook.id}>
+              <div className="mybook" key={mybook.id} data-testid="mybook">
                 <div className="image">
                   <img src={mybook.image ? mybook.image : ""} alt="" />
                 </div>
                 <div className="introduce">
                   <Link to={`/mybooks/${mybook.id}`}>
-                    <div className="title">{mybook.title}</div>
+                    <div className="title" data-testid="title">
+                      {mybook.title}
+                    </div>
                   </Link>
                   <div className="authors">{mybook.authors}</div>
                 </div>

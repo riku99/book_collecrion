@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import reducer from "../reducer";
 import { render } from "@testing-library/react";
 
-function customState(i) {
+export function customState(i) {
   let store = createStore(reducer);
   let customState = { ...store.getState(), ...i };
   return customState;
