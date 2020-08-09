@@ -58,7 +58,7 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "SUCCESS_DELETE_MYBOOK": {
-      return { ...state, redirectToNewPage: true };
+      return { ...state, redirectToNewPage: true, message: action.message };
     }
 
     case "SUCCESS_MESSAGE": {

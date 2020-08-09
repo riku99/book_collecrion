@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent } from "./test-utils";
+import { render } from "./test-utils";
 import "@testing-library/jest-dom/extend-expect";
 import { createStore } from "redux";
 import reducer from "../reducer";
