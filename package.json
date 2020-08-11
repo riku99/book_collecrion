@@ -7,12 +7,13 @@
     "@testing-library/react": "^10.4.8",
     "@testing-library/user-event": "^7.1.2",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
+    "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-router-redux": "^5.0.18",
     "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -61,10 +62,12 @@
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest",
+      "^.+\\.ts?$": "ts-jest",
       "^.+\\.js?$": "ts-jest"
     },
     "testRegex": [
-      "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$"
+      "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
+      "(/tests/.*|(\\.|/)(test|spec))\\.ts?$"
     ],
     "moduleFileExtensions": [
       "ts",

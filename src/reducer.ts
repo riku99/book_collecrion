@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 
 import { booksType } from "./actions/books_action";
 import { RedirectStateType } from "./actions/redirect_action";
+import { usersActionType } from "./actions/users_action";
 
 export type initialState = {
   serchedBooks:
@@ -29,7 +30,7 @@ export type initialState = {
   redirectToNewPage: boolean;
 };
 
-type ActionType = booksType | RedirectStateType;
+type ActionType = booksType | RedirectStateType | usersActionType;
 
 const reducer: Reducer<initialState, ActionType> = (
   state = {
@@ -42,6 +43,10 @@ const reducer: Reducer<initialState, ActionType> = (
   action
 ): initialState => {
   switch (action.type) {
+    case "SUCCESS_NEW_USER": {
+      return { ...state, message: action.message, redirectToNewPage: true };
+    }
+
     case "SUCCESS_GET_BOOK": {
       return { ...state, message: null, serchedBooks: action.data };
     }
@@ -50,11 +55,12 @@ const reducer: Reducer<initialState, ActionType> = (
       return {
         ...state,
         myBooks: action.mybooks,
+        message: null,
       };
     }
 
     case "SUCCESS_GETMYBOOK": {
-      return { ...state, myBook: action.mybook };
+      return { ...state, myBook: action.mybook, message: null };
     }
 
     case "SUCCESS_DELETE_MYBOOK": {
@@ -70,7 +76,7 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "CAHNGE_REDIRECT_STATE": {
-      return { ...state, redirectToNewPage: false };
+      return { ...state, redirectToNewPage: false, message: null };
     }
 
     default: {

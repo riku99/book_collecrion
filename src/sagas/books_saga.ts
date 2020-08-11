@@ -13,7 +13,7 @@ import {
   getMyBooksToRailsApi,
   getMyBookFromRailsApi,
   deleteMyBookToRailsApi,
-} from "../apis/books_apis";
+} from "../apis/books_api";
 
 function* runGetBooks(action: ReturnType<typeof getBooks.get>) {
   try {

@@ -5,7 +5,6 @@ import { createStore } from "redux";
 import reducer from "../reducer";
 
 import MyBooks from "../container/mybooks_container";
-import { customState } from "./test-utils";
 
 describe("<MyBooks />", () => {
   test("mybooksプロップスにデータが入れば要素が表示される", async () => {

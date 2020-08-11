@@ -8,6 +8,8 @@ import {
   watchDeleteMyBook,
 } from "./books_saga";
 
+import { watchNewUser } from "./users_saga";
+
 export default function* rootSaga() {
   yield all([
     watchGetBooks(),
@@ -15,5 +17,6 @@ export default function* rootSaga() {
     watchGetMyBooks(),
     watchGetMyBook(),
     watchDeleteMyBook(),
+    watchNewUser(),
   ]);
 }

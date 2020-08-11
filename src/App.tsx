@@ -6,6 +6,7 @@ import "./App.css";
 import Books from "./container/books_container";
 import MyBooks from "./container/mybooks_container";
 import MyBook from "./container/mybook_container";
+import NewUser from "./container/users/new_user_container";
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
       <div className="wrapper">
         <div className="container">
           <Switch>
+            <Route path="/user/new">
+              <NewUser />
+            </Route>
             <Route path="/mybooks/:id">
               <MyBook />
             </Route>

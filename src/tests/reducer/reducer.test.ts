@@ -1,16 +1,14 @@
 import reducer from "../../reducer";
-import { initialState } from "../../reducer";
-import mybook from "../../components/mybook";
+
+export let defaultState = {
+  serchedBooks: null,
+  myBooks: null,
+  myBook: null,
+  message: null,
+  redirectToNewPage: false,
+};
 
 describe("reducer", () => {
-  let defaultState = {
-    serchedBooks: null,
-    myBooks: null,
-    myBook: null,
-    message: null,
-    redirectToNewPage: false,
-  };
-
   test("initialState", () => {
     // @ts-ignore
     expect(reducer(undefined, {})).toEqual(defaultState);
