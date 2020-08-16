@@ -109,9 +109,6 @@ const Books: FC<BooksPropsType> = ({
           {message && message.error ? (
             <div data-testid="error-message">{message.error}</div>
           ) : null}
-          {message && message.success ? (
-            <div data-testid="success-message">{message.success}</div>
-          ) : null}
         </div>
         <div className="others">
           <Link className="link" to="/mybooks">

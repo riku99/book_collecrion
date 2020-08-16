@@ -9,8 +9,9 @@ export const newUser = {
       },
     },
   }),
-  success: () => ({
+  success: (user: Object) => ({
     type: "SUCCESS_NEW_USER" as const,
+    user: user,
     message: { success: "登録しました" },
   }),
   error: (e: string) => ({ type: "FAILER_MESSAGE", message: { error: e } }),

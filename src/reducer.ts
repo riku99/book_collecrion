@@ -3,8 +3,14 @@ import { Reducer } from "redux";
 import { booksType } from "./actions/books_action";
 import { RedirectStateType } from "./actions/redirect_action";
 import { usersActionType } from "./actions/users_action";
+import { sessionsActionType } from "./actions/sessions_action";
 
 export type initialState = {
+  login: {
+    logged_in: boolean;
+    current_user: Object | null;
+    checked: boolean;
+  };
   serchedBooks:
     | { title: string; authors: string[] | null; image: string | null }[]
     | null;
@@ -30,10 +36,15 @@ export type initialState = {
   redirectToNewPage: boolean;
 };
 
-type ActionType = booksType | RedirectStateType | usersActionType;
+type ActionType =
+  | booksType
+  | RedirectStateType
+  | usersActionType
+  | sessionsActionType;
 
 const reducer: Reducer<initialState, ActionType> = (
   state = {
+    login: { logged_in: false, current_user: null, checked: false },
     serchedBooks: null,
     myBooks: null,
     myBook: null,
@@ -44,11 +55,47 @@ const reducer: Reducer<initialState, ActionType> = (
 ): initialState => {
   switch (action.type) {
     case "SUCCESS_NEW_USER": {
-      return { ...state, message: action.message, redirectToNewPage: true };
+      return {
+        ...state,
+        login: { logged_in: true, current_user: action.user, checked: true },
+        message: action.message,
+        redirectToNewPage: true,
+      };
+    }
+
+    case "SUCCESS_LOGIN": {
+      return {
+        ...state,
+        login: {
+          logged_in: true,
+          current_user: action.current_user,
+          checked: true,
+        },
+        redirectToNewPage: true,
+        message: { success: "ログインしました" },
+      };
+    }
+
+    case "SUCCESS_CURRENT_USER": {
+      return {
+        ...state,
+        login: {
+          logged_in: true,
+          current_user: action.current_user,
+          checked: true,
+        },
+      };
+    }
+
+    case "NONE_CURRENT_USER": {
+      return {
+        ...state,
+        login: { logged_in: false, current_user: null, checked: true },
+      };
     }
 
     case "SUCCESS_GET_BOOK": {
-      return { ...state, message: null, serchedBooks: action.data };
+      return { ...state, serchedBooks: action.data };
     }
 
     case "SUCCESS_GET_MYBOOKS": {
@@ -60,7 +107,7 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "SUCCESS_GETMYBOOK": {
-      return { ...state, myBook: action.mybook, message: null };
+      return { ...state, myBook: action.mybook };
     }
 
     case "SUCCESS_DELETE_MYBOOK": {
@@ -76,7 +123,7 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "CAHNGE_REDIRECT_STATE": {
-      return { ...state, redirectToNewPage: false, message: null };
+      return { ...state, redirectToNewPage: false };
     }
 
     default: {

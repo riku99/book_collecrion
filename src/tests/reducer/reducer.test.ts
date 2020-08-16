@@ -1,6 +1,7 @@
 import reducer from "../../reducer";
 
 export let defaultState = {
+  login: { logged_in: false, current_user: null, checked: false },
   serchedBooks: null,
   myBooks: null,
   myBook: null,

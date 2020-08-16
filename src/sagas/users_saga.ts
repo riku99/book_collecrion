@@ -5,10 +5,9 @@ import { newUserApi } from "../apis/users_api";
 
 function* runNewUser(action: ReturnType<typeof newUser.new>) {
   try {
-    yield call(newUserApi, action.payload);
-    yield put(newUser.success());
+    const data = yield call(newUserApi, action.payload);
+    yield put(newUser.success(data.user));
   } catch (e) {
-    console.log(e.message);
     yield put(newUser.error(e.message));
   }
 }

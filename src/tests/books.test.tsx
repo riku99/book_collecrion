@@ -55,15 +55,6 @@ describe("<Books />", () => {
     expect(errorMessageEle.textContent).toBe("エラーメッセージ");
   });
 
-  test("message{success}に値が入ったらサクセスメッセージが表示される", async () => {
-    const successMessage = { message: { success: "サクセスメッセージ" } };
-    const { findByTestId } = render(<Books />, {
-      testInitialState: successMessage,
-    });
-    const successMessageEle = await findByTestId("success-message");
-    expect(successMessageEle.textContent).toBe("サクセスメッセージ");
-  });
-
   test("検索ボタンを押すとアクションがdispatchされる", async () => {
     const store = createStore(reducer);
     store.dispatch = jest.fn();

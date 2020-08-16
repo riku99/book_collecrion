@@ -2,17 +2,19 @@ import React, { FC, useState, useEffect } from "react";
 import { RouteComponentProps, withRouter } from "react-router";
 import { Link } from "react-router-dom";
 
-import { stateType } from "../../container/users/new_user_container";
-import { dispatchType } from "../../container/users/new_user_container";
-import "./new_user.css";
+import {
+  stateType,
+  dispatchType,
+} from "../../container/sessions/login_container";
+import "./login.css";
 
 type propsType = dispatchType & stateType & RouteComponentProps;
 
-const NewUser: FC<propsType> = ({
+const Login: FC<propsType> = ({
   history,
   message,
   redirectToNewPage,
-  newUser,
+  login,
   changeRedirectState,
 }) => {
   const [username, changeUsername] = useState("");
@@ -28,54 +30,59 @@ const NewUser: FC<propsType> = ({
 
   return (
     <>
-      {message ? <div className="error-message">{message.error}</div> : null}
-      <div className="new-user">
+      {message && message.error ? (
+        <div className="error-message" data-testid="error-message">
+          {message.error}
+        </div>
+      ) : null}
+      <div className="login">
         <div className="form">
           <input
-            className="new-user-form"
+            className="login-form"
             type="text"
-            value={username}
             placeholder="ユーザ名"
+            value={username}
             onChange={(e) => {
               changeUsername(e.target.value);
             }}
             data-testid="username-form"
           />
           <input
-            className="new-user-form"
+            className="login-form"
             type="password"
-            value={password}
             placeholder="6文字以上のパスワード"
+            value={password}
             onChange={(e) => {
               changePassword(e.target.value);
             }}
             data-testid="password-form"
           />
           <input
-            className="new-user-form"
+            className="login-form"
             type="password"
-            value={password_confirmation}
             placeholder="パスワードの確認"
+            value={password_confirmation}
             onChange={(e) => {
               changeConfirmation(e.target.value);
             }}
             data-testid="password-confirmation-form"
           />
-
           <button
-            className="new-user-button"
-            onClick={() => newUser(username, password, password_confirmation)}
-            data-testid="new-button"
+            className="login-button"
+            onClick={() => {
+              login(username, password, password_confirmation);
+            }}
+            data-testid="login-button"
           >
-            登録する
+            ログイン
           </button>
         </div>
       </div>
-      <div className="for-login">
-        アカウントをお持ちでないですか?<Link to="/login">ログインする</Link>
+      <div className="for-new-user">
+        アカウントをお持ちでないですか?<Link to="/users/new">登録する</Link>
       </div>
     </>
   );
 };
 
-export default withRouter(NewUser);
+export default withRouter(Login);

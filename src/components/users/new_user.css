@@ -1,0 +1,55 @@
+.new-user {
+  width: 300px;
+  height: 70%;
+  margin: 0 auto;
+  margin-top: 30px;
+  position: relative;
+  border: solid 1px rgb(185, 185, 185);
+}
+
+.error-message {
+  margin: 0 auto;
+  text-align: center;
+  color: red;
+}
+
+.new-user .form {
+  width: 100%;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.new-user-form {
+  width: 80%;
+  height: 60px;
+  font-size: 15px;
+  border: none;
+  border-bottom: solid 1px rgb(185, 185, 185);
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  outline: none;
+}
+
+.new-user-button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: hsl(143, 100%, 36%);
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.for-login {
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.for-login a {
+  margin-left: 10px;
+  color: #0099ff;
+}

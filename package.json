@@ -65,10 +65,6 @@
       "^.+\\.ts?$": "ts-jest",
       "^.+\\.js?$": "ts-jest"
     },
-    "testRegex": [
-      "(/tests/.*|(\\.|/)(test|spec))\\.tsx?$",
-      "(/tests/.*|(\\.|/)(test|spec))\\.ts?$"
-    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
