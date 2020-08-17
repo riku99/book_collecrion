@@ -72,7 +72,7 @@ const NewUser: FC<propsType> = ({
         </div>
       </div>
       <div className="for-login">
-        アカウントをお持ちでないですか?<Link to="/login">ログインする</Link>
+        アカウントをお持ちですか?<Link to="/login">ログインする</Link>
       </div>
     </>
   );

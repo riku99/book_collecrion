@@ -20,7 +20,7 @@ const PrivateRoute: FC<Private> = ({ children, logged_in, path }) => {
   return logged_in ? (
     <Route path={path}>{children}</Route>
   ) : (
-    <Redirect to="/users/new"></Redirect>
+    <Redirect to="/"></Redirect>
   );
 };
 
@@ -48,7 +48,7 @@ const App: FC<AppProps> = ({ logged_in, checked, message, getCurrentUser }) => {
 
   return (
     <>
-      <header></header>
+      {logged_in ? <header></header> : null}
       <div className="wrapper">
         <div className="container">
           <Switch>
