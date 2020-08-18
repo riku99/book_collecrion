@@ -8,7 +8,11 @@ import {
   watchDeleteMyBook,
 } from "./books_saga";
 import { watchNewUser } from "./users_saga";
-import { watchGetCurrentUser, watchCreateLogin } from "./sessions_saga";
+import {
+  watchGetCurrentUser,
+  watchCreateLogin,
+  watchDoLogout,
+} from "./sessions_saga";
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +24,6 @@ export default function* rootSaga() {
     watchNewUser(),
     watchGetCurrentUser(),
     watchCreateLogin(),
+    watchDoLogout(),
   ]);
 }

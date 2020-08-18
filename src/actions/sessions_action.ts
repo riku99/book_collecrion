@@ -32,7 +32,13 @@ export const login = {
   }),
 };
 
+export const logout = {
+  do: () => ({ type: "DO_LOGOUT" }),
+  success: () => ({ type: "SUCCESS_LOGOUT" as const }),
+};
+
 export type sessionsActionType =
   | ReturnType<typeof currentUser.success>
   | ReturnType<typeof currentUser.none>
-  | ReturnType<typeof login.success>;
+  | ReturnType<typeof login.success>
+  | ReturnType<typeof logout.success>;

@@ -2,8 +2,8 @@ import { takeLatest, put, call } from "redux-saga/effects";
 
 import { getCurrentUser } from "../apis/sessions_api";
 import { currentUser } from "../actions/sessions_action";
-import { login } from "../actions/sessions_action";
-import { createLogin } from "../apis/sessions_api";
+import { login, logout } from "../actions/sessions_action";
+import { createLogin, doLogout } from "../apis/sessions_api";
 
 function* runGetCurrentUser() {
   const response = yield getCurrentUser();
@@ -21,6 +21,14 @@ function* runCteateLogin(action: ReturnType<typeof login.create>) {
     yield put(login.success(response));
   } catch (e) {
     yield put(login.error(e.message));
+  }
+}
+
+function* runDoLogout() {
+  try {
+    yield doLogout();
+    yield put(logout.success());
+  } catch (e) {
     console.log(e.message);
   }
 }
@@ -31,4 +39,8 @@ export function* watchGetCurrentUser() {
 
 export function* watchCreateLogin() {
   yield takeLatest("CREATE_LOGIN", runCteateLogin);
+}
+
+export function* watchDoLogout() {
+  yield takeLatest("DO_LOGOUT", runDoLogout);
 }

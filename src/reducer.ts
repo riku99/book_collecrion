@@ -76,6 +76,13 @@ const reducer: Reducer<initialState, ActionType> = (
       };
     }
 
+    case "SUCCESS_LOGOUT": {
+      return {
+        ...state,
+        login: { logged_in: false, current_user: null, checked: true },
+      };
+    }
+
     case "SUCCESS_CURRENT_USER": {
       return {
         ...state,

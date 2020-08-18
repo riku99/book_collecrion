@@ -11,6 +11,7 @@ import MyBooks from "./container/mybooks_container";
 import MyBook from "./container/mybook_container";
 import NewUser from "./container/users/new_user_container";
 import Login from "./container/sessions/login_container";
+import Logout from "./container/sessions/logout_container";
 import { initialState } from "./reducer";
 import { currentUser } from "./actions/sessions_action";
 
@@ -48,7 +49,11 @@ const App: FC<AppProps> = ({ logged_in, checked, message, getCurrentUser }) => {
 
   return (
     <>
-      {logged_in ? <header></header> : null}
+      {logged_in ? (
+        <header>
+          <Logout />
+        </header>
+      ) : null}
       <div className="wrapper">
         <div className="container">
           <Switch>

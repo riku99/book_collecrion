@@ -32,3 +32,7 @@ export const createLogin = async (params: {
     return response.data;
   }
 };
+
+export const doLogout = async () => {
+  await axios.delete(`${localhost}/api/v1/logout`, { withCredentials: true });
+};
