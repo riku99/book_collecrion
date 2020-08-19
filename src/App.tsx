@@ -1,7 +1,10 @@
-import React, { FC, ReactNode, useEffect } from "react";
+import React, { FC, ReactNode, useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { CSSTransition } from "react-transition-group";
 
 import "./App.css";
 
@@ -14,6 +17,7 @@ import Login from "./container/sessions/login_container";
 import Logout from "./container/sessions/logout_container";
 import { initialState } from "./reducer";
 import { currentUser } from "./actions/sessions_action";
+import { deleteMessage } from "./actions/messages_action";
 
 type Private = { children: ReactNode; logged_in: boolean; path: string };
 
@@ -35,12 +39,23 @@ const mapDispatchProps = (dispatch: Dispatch) => ({
   getCurrentUser: () => {
     dispatch(currentUser.get());
   },
+  deleteMessage: () => {
+    dispatch(deleteMessage.deleteSuccess());
+  },
 });
 
 type AppProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchProps>;
 
-const App: FC<AppProps> = ({ logged_in, checked, message, getCurrentUser }) => {
+const App: FC<AppProps> = ({
+  logged_in,
+  checked,
+  message,
+  getCurrentUser,
+  deleteMessage,
+}) => {
+  const [menu, changeMenu] = useState(false);
+  const [bar, changeBar] = useState(true);
   useEffect(getCurrentUser, [logged_in]);
 
   if (!checked) {
@@ -49,38 +64,101 @@ const App: FC<AppProps> = ({ logged_in, checked, message, getCurrentUser }) => {
 
   return (
     <>
-      {logged_in ? (
-        <header>
-          <Logout />
-        </header>
-      ) : null}
-      <div className="wrapper">
-        <div className="container">
-          <Switch>
-            <Route path="/users/new">
-              <NewUser />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <PrivateRoute path="/mybooks/:id" logged_in={logged_in}>
-              <MyBook />
-            </PrivateRoute>
-            <PrivateRoute path="/mybooks" logged_in={logged_in}>
-              <MyBooks />
-            </PrivateRoute>
-            <PrivateRoute path="/books" logged_in={logged_in}>
-              <Books />
-            </PrivateRoute>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-          {message && message.success ? (
-            <div className="success-message">{message.success}</div>
+      <CSSTransition in={menu} timeout={1000} classNames="wrapper">
+        <div className="wrapper">
+          {logged_in ? (
+            <header>
+              <CSSTransition
+                in={bar}
+                timeout={500}
+                classNames="bar"
+                unmountOnExit
+              >
+                <button
+                  className="menu-bar"
+                  onClick={() => {
+                    changeMenu(true);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
+                </button>
+              </CSSTransition>
+            </header>
           ) : null}
+          <div className="container">
+            <Switch>
+              <Route path="/users/new">
+                <NewUser />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <PrivateRoute path="/mybooks/:id" logged_in={logged_in}>
+                <MyBook />
+              </PrivateRoute>
+              <PrivateRoute path="/mybooks" logged_in={logged_in}>
+                <MyBooks />
+              </PrivateRoute>
+              <PrivateRoute path="/books" logged_in={logged_in}>
+                <Books />
+              </PrivateRoute>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+            <CSSTransition
+              in={!!message?.success}
+              timeout={3000}
+              unmountOnExit
+              onEntered={() => deleteMessage()}
+              classNames={"message"}
+            >
+              <div className="message">{message?.success}</div>
+            </CSSTransition>
+          </div>
         </div>
-      </div>
+      </CSSTransition>
+
+      {logged_in ? (
+        <CSSTransition
+          in={menu}
+          timeout={{ enter: 500, exit: 0 }}
+          classNames="menu"
+          unmountOnExit
+          onEnter={() => {
+            changeBar(false);
+          }}
+          onExit={() => {
+            changeBar(true);
+          }}
+        >
+          <div className="menu">
+            <button
+              className="menu-close"
+              onClick={() => {
+                changeMenu(false);
+              }}
+            >
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+
+            <Logout
+              style={{
+                backgroundColor: "inherit",
+                border: "none",
+                display: "block",
+                marginTop: "20px",
+                marginBottom: "0",
+                marginRight: "auto",
+                marginLeft: "auto",
+                fontWeight: "bold",
+                color: " rgb(48, 53, 71)",
+                outline: "none",
+              }}
+            />
+          </div>
+        </CSSTransition>
+      ) : null}
     </>
   );
 };

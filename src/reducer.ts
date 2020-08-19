@@ -4,6 +4,7 @@ import { booksType } from "./actions/books_action";
 import { RedirectStateType } from "./actions/redirect_action";
 import { usersActionType } from "./actions/users_action";
 import { sessionsActionType } from "./actions/sessions_action";
+import { messagesActionType } from "./actions/messages_action";
 
 export type initialState = {
   login: {
@@ -40,7 +41,8 @@ type ActionType =
   | booksType
   | RedirectStateType
   | usersActionType
-  | sessionsActionType;
+  | sessionsActionType
+  | messagesActionType;
 
 const reducer: Reducer<initialState, ActionType> = (
   state = {
@@ -123,6 +125,18 @@ const reducer: Reducer<initialState, ActionType> = (
 
     case "SUCCESS_MESSAGE": {
       return { ...state, message: action.message };
+    }
+
+    case "DELETE_SUCCESS_MESSAGE": {
+      console.log("ok");
+      return {
+        ...state,
+        message: {
+          error: state.message?.error,
+          success: undefined,
+          info: state.message?.info,
+        },
+      };
     }
 
     case "FAILER_MESSAGE": {
