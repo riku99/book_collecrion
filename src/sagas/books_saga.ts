@@ -58,7 +58,6 @@ function* runDeleteMyBook(action: ReturnType<typeof deleteMyBook.delete>) {
     yield put(deleteMyBook.success("削除しました"));
   } catch (e) {
     yield put(deleteMyBook.error(e.message));
-    console.log(e.message);
   }
 }
 

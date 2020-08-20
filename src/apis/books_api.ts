@@ -49,21 +49,32 @@ export let registerBookToRailsApi = async (data: {
         image: data.image,
         memo: data.memo,
       },
-    }
+    },
+    { withCredentials: true }
   );
 
   if (response.status !== 200) {
     throw new Error("エラーが発生しました");
   }
 
+  if (response.data.error) {
+    throw new Error(response.data.error);
+  }
+
   return response.data;
 };
 
 export let getMyBooksToRailsApi = async () => {
-  let response = await axios.get("http://localhost:4000/api/v1/mybooks");
+  let response = await axios.get("http://localhost:4000/api/v1/mybooks", {
+    withCredentials: true,
+  });
 
   if (response.status !== 200) {
     throw new Error("エラーが発生しました");
+  }
+
+  if (response.data.error) {
+    throw new Error(response.data.error);
   }
 
   if (response.data.length !== 0) {
@@ -87,7 +98,9 @@ export let getMyBooksToRailsApi = async () => {
 };
 
 export let getMyBookFromRailsApi = async (id: number) => {
-  let response = await axios(`http://localhost:4000/api/v1/mybooks/${id}`);
+  let response = await axios(`http://localhost:4000/api/v1/mybooks/${id}`, {
+    withCredentials: true,
+  });
 
   if (response.status !== 200) {
     throw new Error("エラーが発生しました");
@@ -108,10 +121,15 @@ export let getMyBookFromRailsApi = async (id: number) => {
 
 export const deleteMyBookToRailsApi = async (id: number) => {
   let response = await axios.delete(
-    `http://localhost:4000/api/v1/mybooks/${id}`
+    `http://localhost:4000/api/v1/mybooks/${id}`,
+    { withCredentials: true }
   );
 
   if (response.status !== 200) {
     throw new Error("エラーが発生しました");
+  }
+
+  if (response.data.error) {
+    throw new Error(response.data.response);
   }
 };

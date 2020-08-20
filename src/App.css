@@ -82,8 +82,9 @@ header {
 
 .menu {
   width: 200px;
-  height: 100px;
+  height: 100vh;
   float: right;
+  background-color: hsla(0, 0%, 97%, 0.91);
 }
 
 .menu-enter {
@@ -106,6 +107,18 @@ header {
   outline: none;
   font-size: 20px;
   color: hsl(143, 100%, 36%);
+}
+
+.menu-link {
+  background-color: inherit;
+  border: none;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  font-weight: bold;
+  color: rgb(48, 53, 71);
+  outline: none;
+  text-align: center;
 }
 
 .message {

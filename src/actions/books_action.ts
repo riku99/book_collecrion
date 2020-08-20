@@ -74,7 +74,10 @@ export const getMyBook = {
 };
 
 export const deleteMyBook = {
-  delete: (id: number) => ({ type: "DELETE_MYBOOK" as const, id: id }),
+  delete: (id: number) => ({
+    type: "DELETE_MYBOOK" as const,
+    id: id,
+  }),
   success: (message: string) => ({
     type: "SUCCESS_DELETE_MYBOOK" as const,
     redirectToNewPage: true,

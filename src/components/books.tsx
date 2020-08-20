@@ -1,5 +1,4 @@
 import React, { FC, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { BooksPropsType } from "../container/books_container";
 import "./books.css";
@@ -109,11 +108,6 @@ const Books: FC<BooksPropsType> = ({
           {message && message.error ? (
             <div data-testid="error-message">{message.error}</div>
           ) : null}
-        </div>
-        <div className="others">
-          <Link className="link" to="/mybooks">
-            MyBooks
-          </Link>
         </div>
       </div>
     </>

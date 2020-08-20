@@ -1,10 +1,11 @@
-import React, { FC, ReactNode, useEffect, useState } from "react";
+import React, { FC, ReactNode, useEffect, useState, useRef } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { CSSTransition } from "react-transition-group";
+import { Link } from "react-router-dom";
 
 import "./App.css";
 
@@ -122,7 +123,7 @@ const App: FC<AppProps> = ({
       {logged_in ? (
         <CSSTransition
           in={menu}
-          timeout={{ enter: 500, exit: 0 }}
+          timeout={500}
           classNames="menu"
           unmountOnExit
           onEnter={() => {
@@ -142,6 +143,26 @@ const App: FC<AppProps> = ({
               <FontAwesomeIcon icon={faTimes} />
             </button>
 
+            <Link
+              to="/books"
+              className="menu-link"
+              onClick={() => {
+                changeMenu(false);
+              }}
+            >
+              本をさがす
+            </Link>
+
+            <Link
+              to="/mybooks"
+              className="menu-link"
+              onClick={() => {
+                changeMenu(false);
+              }}
+            >
+              MyBooks
+            </Link>
+
             <Logout
               style={{
                 backgroundColor: "inherit",
@@ -154,6 +175,10 @@ const App: FC<AppProps> = ({
                 fontWeight: "bold",
                 color: " rgb(48, 53, 71)",
                 outline: "none",
+                fontSize: "16px",
+              }}
+              onClick={() => {
+                changeMenu(false);
               }}
             />
           </div>

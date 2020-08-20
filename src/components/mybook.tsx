@@ -58,12 +58,10 @@ const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({
             >
               削除する
             </button>
-            <button>メモを編集する</button>
           </div>
         </div>
       ) : null}
       {message && message.error ? <div>{message.error}</div> : null}
-      {message && message.success ? <div>{message.success}</div> : null}
     </>
   );
 };

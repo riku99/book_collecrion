@@ -37,6 +37,15 @@ export type initialState = {
   redirectToNewPage: boolean;
 };
 
+const initialState = {
+  login: { logged_in: false, current_user: null, checked: false },
+  serchedBooks: null,
+  myBooks: null,
+  myBook: null,
+  message: null,
+  redirectToNewPage: false,
+};
+
 type ActionType =
   | booksType
   | RedirectStateType
@@ -79,10 +88,7 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "SUCCESS_LOGOUT": {
-      return {
-        ...state,
-        login: { logged_in: false, current_user: null, checked: true },
-      };
+      return initialState;
     }
 
     case "SUCCESS_CURRENT_USER": {
@@ -111,7 +117,6 @@ const reducer: Reducer<initialState, ActionType> = (
       return {
         ...state,
         myBooks: action.mybooks,
-        message: null,
       };
     }
 
@@ -128,7 +133,6 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "DELETE_SUCCESS_MESSAGE": {
-      console.log("ok");
       return {
         ...state,
         message: {

@@ -2,9 +2,11 @@ import React, { FC } from "react";
 
 import { dispatchType } from "../../container/sessions/logout_container";
 
-type propsType = dispatchType & { style: Object };
+type propsType = dispatchType & { style: Object } & {
+  onClick: Function | null;
+};
 
-const Logout: FC<propsType> = ({ logout, style }) => {
+const Logout: FC<propsType> = ({ logout, style, onClick }) => {
   return (
     <button
       style={style}
@@ -12,6 +14,9 @@ const Logout: FC<propsType> = ({ logout, style }) => {
         const r = window.confirm("ログアウトしますか?");
         if (r) {
           logout();
+          if (onClick) {
+            onClick();
+          }
         }
       }}
     >
