@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { RouteComponentProps, withRouter } from "react-router";
 
@@ -15,6 +15,8 @@ const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({
   changeRedirectState,
 }) => {
   let { id } = useParams();
+  const [loading, changeLoading] = useState(true);
+  const firstRender = useRef(true);
 
   let redirectToMybooks = () => {
     if (redirectToNewPage) {
@@ -27,11 +29,19 @@ const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({
     getMyBook(id);
   }, [getMyBook, id]);
 
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+    } else {
+      changeLoading(false);
+    }
+  }, [mybook]);
+
   useEffect(redirectToMybooks, [redirectToNewPage]);
 
   return (
     <>
-      {mybook ? (
+      {loading ? null : mybook ? (
         <div className="one-mybook">
           <div className="image">
             <img src={mybook.image} alt="" />

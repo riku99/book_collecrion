@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
+import Spinner from "react-spinkit";
 
 import { BooksPropsType } from "../container/books_container";
 import "./books.css";
@@ -9,6 +10,7 @@ const Books: FC<BooksPropsType> = ({
   getBooks,
   registerBooks,
 }) => {
+  const [loading, changeLoading] = useState(false);
   const [keyword, changeKeyword] = useState("");
   const [memos, changeMemo] = useState(() => {
     if (serchedBooks) {
@@ -20,6 +22,10 @@ const Books: FC<BooksPropsType> = ({
     }
     return null;
   });
+
+  useEffect(() => {
+    changeLoading(false);
+  }, [serchedBooks]);
 
   return (
     <>
@@ -43,70 +49,80 @@ const Books: FC<BooksPropsType> = ({
                   className="serch-button"
                   type="button"
                   value="検索"
-                  onClick={() => getBooks(keyword)}
+                  onClick={() => {
+                    changeLoading(true);
+                    getBooks(keyword);
+                  }}
                   data-testid="search-button"
                 />
               </form>
             </div>
           </div>
           <div className="books" data-testid="books">
-            {serchedBooks
-              ? serchedBooks.map((book, index) => {
-                  return (
-                    <div
-                      className="book"
-                      key={index.toString()}
-                      data-testid="book"
-                    >
-                      <div className="introduce">
-                        <div className="title">{book.title}</div>
-                        {book.authors ? (
-                          <div className="authors">
-                            {book.authors.toString()}
-                          </div>
-                        ) : (
-                          <div className="authors">作者不明</div>
-                        )}
-                        <div className="registerBooks">
-                          <div className="register-form">
-                            <textarea
-                              value={memos ? memos["memo" + index] : undefined}
-                              placeholder="メモやコメントを残す"
-                              onChange={(e) => {
-                                changeMemo({
-                                  ...memos,
-                                  ["memo" + index]: e.target.value,
-                                });
-                              }}
-                              data-testid="memo"
-                            ></textarea>
-                          </div>
-                          <div className="register-form">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                registerBooks(
-                                  book.title,
-                                  book.authors,
-                                  book.image,
-                                  memos ? memos["memo" + index] : ""
-                                );
-                              }}
-                              data-testid="register"
-                            >
-                              MyBookに登録
-                            </button>
-                          </div>
+            {loading ? (
+              <div style={{ marginLeft: "50%", marginTop: "50%" }}>
+                <Spinner name="line-spin-fade-loader" color="green" />
+              </div>
+            ) : serchedBooks ? (
+              serchedBooks.map((book, index) => {
+                return (
+                  <div
+                    className="book"
+                    key={index.toString()}
+                    data-testid="book"
+                  >
+                    <div className="introduce">
+                      <div className="title">{book.title}</div>
+                      {book.authors ? (
+                        <div className="authors">{book.authors.toString()}</div>
+                      ) : (
+                        <div className="authors">作者不明</div>
+                      )}
+                      <div className="registerBooks">
+                        <div className="register-form">
+                          <textarea
+                            value={memos ? memos["memo" + index] : undefined}
+                            placeholder="メモやコメントを残す"
+                            onChange={(e) => {
+                              changeMemo({
+                                ...memos,
+                                ["memo" + index]: e.target.value,
+                              });
+                            }}
+                            data-testid="memo"
+                          ></textarea>
+                        </div>
+                        <div className="register-form">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              registerBooks(
+                                book.title,
+                                book.authors,
+                                book.image,
+                                memos ? memos["memo" + index] : ""
+                              );
+                            }}
+                            data-testid="register"
+                          >
+                            MyBookに登録
+                          </button>
                         </div>
                       </div>
-                      {book.image ? <img src={book.image} alt=""></img> : null}
                     </div>
-                  );
-                })
-              : null}
+                    {book.image ? <img src={book.image} alt=""></img> : null}
+                  </div>
+                );
+              })
+            ) : null}
           </div>
           {message && message.error ? (
-            <div data-testid="error-message">{message.error}</div>
+            <div
+              data-testid="error-message"
+              style={{ color: "red", textAlign: "center" }}
+            >
+              {message.error}
+            </div>
           ) : null}
         </div>
       </div>

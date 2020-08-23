@@ -1,5 +1,4 @@
 import { takeLatest, put, call } from "redux-saga/effects";
-import axios from "axios";
 
 import { getCurrentUser } from "../apis/sessions_api";
 import { currentUser } from "../actions/sessions_action";

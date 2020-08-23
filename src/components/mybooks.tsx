@@ -1,5 +1,6 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Pagination from "material-ui-flat-pagination";
 
 import { MyBooksStateAndDispatchType } from "../container/mybooks_container";
 import "./mybooks.css";
@@ -7,12 +8,13 @@ import "./mybooks.css";
 type MyBooksPropsType = MyBooksStateAndDispatchType;
 
 const MyBooks: FC<MyBooksPropsType> = ({ mybooks, message, getMyBooks }) => {
+  const [offset, changeOffset] = useState(0);
   useEffect(getMyBooks, []);
   return (
     <>
       <div className="mybooks">
         {mybooks ? (
-          mybooks.map((mybook) => {
+          mybooks.slice(offset, offset + 10).map((mybook) => {
             return (
               <div className="mybook" key={mybook.id} data-testid="mybook">
                 <div className="image">
@@ -33,6 +35,18 @@ const MyBooks: FC<MyBooksPropsType> = ({ mybooks, message, getMyBooks }) => {
           <p>登録されていません</p>
         )}
       </div>
+      {mybooks && mybooks.length < 10 ? null : (
+        <Pagination
+          limit={10}
+          offset={offset}
+          total={mybooks ? mybooks.length : 0}
+          onClick={(e, offset) => {
+            changeOffset(offset);
+          }}
+          classes={{ root: "pagination" }}
+          data-testid={"pagination"}
+        ></Pagination>
+      )}
       {message && message.error ? <div>{message.error}</div> : null}
     </>
   );

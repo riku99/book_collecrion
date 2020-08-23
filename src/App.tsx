@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect, useState, useRef } from "react";
+import React, { FC, ReactNode, useEffect, useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";

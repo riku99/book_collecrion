@@ -37,7 +37,7 @@ export type initialState = {
   redirectToNewPage: boolean;
 };
 
-const initialState = {
+export const defaultState = {
   login: { logged_in: false, current_user: null, checked: false },
   serchedBooks: null,
   myBooks: null,
@@ -88,7 +88,7 @@ const reducer: Reducer<initialState, ActionType> = (
     }
 
     case "SUCCESS_LOGOUT": {
-      return initialState;
+      return defaultState;
     }
 
     case "SUCCESS_CURRENT_USER": {

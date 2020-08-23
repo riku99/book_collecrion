@@ -39,7 +39,7 @@ describe("<Login />", async () => {
     expect(errorMessage).toHaveTextContent("ユーザーが存在しません");
   });
 
-  test("ログインボタンを押すとdisoatchされる", async () => {
+  test("ログインボタンを押すとdispatchされる", async () => {
     const store = createStore(reducer);
     store.dispatch = jest.fn();
     const { findByTestId } = render(<Login />, { store: store });

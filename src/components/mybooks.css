@@ -28,3 +28,7 @@ a {
 .introduce .authors {
   color: #686464;
 }
+
+.pagination {
+  text-align: center;
+}

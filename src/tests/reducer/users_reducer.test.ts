@@ -1,6 +1,5 @@
 import reducer from "../../reducer";
-
-import { defaultState } from "./reducer.test";
+import { defaultState } from "../../reducer";
 
 describe("ruducer_for_users", () => {
   test("SUCCESS_NEW_USER", () => {

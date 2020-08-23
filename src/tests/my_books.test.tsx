@@ -32,4 +32,44 @@ describe("<MyBooks />", () => {
     render(<MyBooks />, { store: store });
     expect(store.dispatch).toHaveBeenCalledWith({ type: "GET_MYBOOKS" });
   });
+
+  test("mybooksが10個未満の場合はページャーが表示されない", async () => {
+    let myBooks = [];
+    for (let n = 1; n < 10; n++) {
+      myBooks.push({
+        id: n,
+        title: "test book",
+        authors: "riku",
+        image: null,
+        memo: "ok",
+        data: "8/1",
+      });
+    }
+
+    const { queryByTestId } = render(<MyBooks />, {
+      testInitialState: { myBooks: myBooks },
+    });
+    const pagination = queryByTestId("pagination");
+    expect(pagination).toBeNull();
+  });
+
+  test("mybooksが10個以上の場合はページャーが表示される", async () => {
+    let myBooks = [];
+    for (let n = 1; n < 11; n++) {
+      myBooks.push({
+        id: n,
+        title: "test book",
+        authors: "riku",
+        image: null,
+        memo: "ok",
+        data: "8/1",
+      });
+    }
+
+    const { queryByTestId } = render(<MyBooks />, {
+      testInitialState: { myBooks: myBooks },
+    });
+    const pagination = queryByTestId("pagination");
+    expect(pagination).toBeTruthy();
+  });
 });

@@ -1,6 +1,5 @@
 import reducer from "../../reducer";
-
-import { defaultState } from "./reducer.test";
+import { defaultState } from "../../reducer";
 
 describe("reducer_for_sessions", () => {
   test("SUCCESS_CURRENT_USER", () => {
@@ -43,5 +42,12 @@ describe("reducer_for_sessions", () => {
       redirectToNewPage: true,
       message: { success: "ログインしました" },
     });
+  });
+
+  test("SUCCESS_LOGOUT", () => {
+    const action = {
+      type: "SUCCESS_LOGOUT" as const,
+    };
+    expect(reducer(defaultState, action)).toEqual(defaultState);
   });
 });

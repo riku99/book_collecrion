@@ -1,16 +1,8 @@
 import reducer from "../../reducer";
-
-export let defaultState = {
-  login: { logged_in: false, current_user: null, checked: false },
-  serchedBooks: null,
-  myBooks: null,
-  myBook: null,
-  message: null,
-  redirectToNewPage: false,
-};
+import { defaultState } from "../../reducer";
 
 describe("reducer", () => {
-  test("initialState", () => {
+  test("defaultState", () => {
     // @ts-ignore
     expect(reducer(undefined, {})).toEqual(defaultState);
   });
@@ -86,6 +78,18 @@ describe("reducer", () => {
         message: { success: "OK" },
       })
     ).toEqual({ ...defaultState, message: { success: "OK" } });
+  });
+
+  test("DELETE_SUCCESS_MESSAGE", () => {
+    const action = { type: "DELETE_SUCCESS_MESSAGE" as const };
+    const customDefauleState = {
+      ...defaultState,
+      message: { error: undefined, success: "ok", info: undefined },
+    };
+    expect(reducer(defaultState, action)).toEqual({
+      ...customDefauleState,
+      message: { error: undefined, success: undefined, info: undefined },
+    });
   });
 
   test("FAILER_MESSAGE", () => {
