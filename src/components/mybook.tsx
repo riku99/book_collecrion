@@ -71,7 +71,9 @@ const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({
           </div>
         </div>
       ) : null}
-      {message && message.error ? <div>{message.error}</div> : null}
+      {message && message.error ? (
+        <div style={{ color: "red", textAlign: "center" }}>{message.error}</div>
+      ) : null}
     </>
   );
 };

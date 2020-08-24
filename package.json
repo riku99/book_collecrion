@@ -18,6 +18,7 @@
     "@types/react-router-redux": "^5.0.18",
     "@types/react-spinkit": "^3.0.6",
     "@types/react-transition-group": "^4.4.0",
+    "animejs": "^3.2.0",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "material-ui-flat-pagination": "^4.1.1",

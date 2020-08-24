@@ -54,14 +54,7 @@ type ActionType =
   | messagesActionType;
 
 const reducer: Reducer<initialState, ActionType> = (
-  state = {
-    login: { logged_in: false, current_user: null, checked: false },
-    serchedBooks: null,
-    myBooks: null,
-    myBook: null,
-    message: null,
-    redirectToNewPage: false,
-  },
+  state = defaultState,
   action
 ): initialState => {
   switch (action.type) {

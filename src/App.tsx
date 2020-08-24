@@ -57,6 +57,9 @@ const App: FC<AppProps> = ({
 }) => {
   const [menu, changeMenu] = useState(false);
   const [bar, changeBar] = useState(true);
+  const [dialogBackground, changeDialogBackground] = useState("none-dialog");
+  const [wrapDialog, chnageWrapDialog] = useState("none-wrap-dialog");
+  const [dialog, changeDialog] = useState(false);
   useEffect(getCurrentUser, [logged_in]);
 
   if (!checked) {
@@ -69,6 +72,7 @@ const App: FC<AppProps> = ({
         <div className="wrapper">
           {logged_in ? (
             <header>
+              <div className="logo">Book Collection</div>
               <CSSTransition
                 in={bar}
                 timeout={500}
@@ -163,6 +167,17 @@ const App: FC<AppProps> = ({
               MyBooks
             </Link>
 
+            <button
+              className="menu-link"
+              onClick={() => {
+                changeDialogBackground("dialog-background ");
+                chnageWrapDialog("wrap-dialog");
+                changeDialog(true);
+              }}
+            >
+              Book Collectionとは
+            </button>
+
             <Logout
               style={{
                 backgroundColor: "inherit",
@@ -184,6 +199,42 @@ const App: FC<AppProps> = ({
           </div>
         </CSSTransition>
       ) : null}
+
+      <div className={dialogBackground}></div>
+      <div className={wrapDialog}>
+        <CSSTransition
+          in={dialog}
+          timeout={5000}
+          classNames={"dialog"}
+          unmountOnExit
+        >
+          <div className="dialog">
+            <CSSTransition
+              in={dialog}
+              appear={true}
+              timeout={7000}
+              classNames={"dialog-content"}
+            >
+              <div className="dialog-content">
+                <button
+                  className="dialog-close"
+                  onClick={() => {
+                    changeDialogBackground("none-dialog");
+                    chnageWrapDialog("none-wrap-dialog");
+                    changeDialog(false);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+                <p>
+                  自分の好きな本、読みたい本を検索してメモなどをつけながら保存できるサービスです！
+                </p>
+                <p>また、私がReactを使って初めて開発したものです！</p>
+              </div>
+            </CSSTransition>
+          </div>
+        </CSSTransition>
+      </div>
     </>
   );
 };

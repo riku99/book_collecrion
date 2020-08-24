@@ -8,6 +8,18 @@ header {
   z-index: 10;
 }
 
+.logo {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: rgb(48, 53, 71);
+  font-size: 25px;
+  font-family: "Avenir";
+}
+
 * {
   box-sizing: border-box;
   font-family: "ヒラギノ角ゴシック";
@@ -144,4 +156,90 @@ header {
 
 .message-exit-active {
   display: none;
+}
+
+.none-dialog {
+  display: none;
+}
+
+.dialog-background {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 11;
+}
+
+.none-wrap-dialog {
+  display: none;
+}
+
+.wrap-dialog {
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+}
+
+.dialog-enter {
+  width: 3px;
+  height: 1px;
+  background-color: white;
+}
+
+.dialog-enter-active {
+  width: 600px;
+  height: 400px;
+  transition: width 2s 1s, height 1s;
+}
+
+.dialog-enter-done {
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 12;
+}
+
+.dialog-content {
+  color: rgb(48, 53, 71);
+  font-weight: bold;
+  width: 97%;
+  margin: 0 auto;
+}
+
+.dialog-content-appear {
+  opacity: 0;
+}
+
+.dialog-content-appear-active {
+  opacity: 1;
+  transition: 1s 3s;
+}
+
+.dialog-content-enter {
+  opacity: 0;
+}
+
+.dialog-content-enter-active {
+  opacity: 1;
+  transition: 1s 3s;
+}
+
+.dialog-close {
+  border: none;
+  background-color: inherit;
+  outline: none;
+  font-size: 20px;
+  color: hsl(143, 100%, 36%);
 }

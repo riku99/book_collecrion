@@ -60,7 +60,7 @@ const Books: FC<BooksPropsType> = ({
           </div>
           <div className="books" data-testid="books">
             {loading ? (
-              <div style={{ marginLeft: "50%", marginTop: "50%" }}>
+              <div className="loading">
                 <Spinner name="line-spin-fade-loader" color="green" />
               </div>
             ) : serchedBooks ? (
