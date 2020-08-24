@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "material-ui-flat-pagination";
 
-import { MyBooksStateAndDispatchType } from "../container/mybooks_container";
+import { MyBooksStateAndDispatchType } from "../../container/books/mybooks_container";
 import "./mybooks.css";
 
 type MyBooksPropsType = MyBooksStateAndDispatchType;

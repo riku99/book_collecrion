@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { RouteComponentProps, withRouter } from "react-router";
 
-import { MyBookStateAndDispatchType } from "../container/mybook_container";
+import { MyBookStateAndDispatchType } from "../../container/books/mybook_container";
 import "./mybook.css";
 
 const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({

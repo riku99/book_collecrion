@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import Spinner from "react-spinkit";
 
-import { BooksPropsType } from "../container/books_container";
+import { BooksPropsType } from "../../container/books/books_container";
 import "./books.css";
 
 const Books: FC<BooksPropsType> = ({

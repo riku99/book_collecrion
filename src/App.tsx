@@ -10,9 +10,9 @@ import { Link } from "react-router-dom";
 import "./App.css";
 
 import Home from "./components/home/home";
-import Books from "./container/books_container";
-import MyBooks from "./container/mybooks_container";
-import MyBook from "./container/mybook_container";
+import Books from "./container/books/books_container";
+import MyBooks from "./container/books/mybooks_container";
+import MyBook from "./container/books/mybook_container";
 import NewUser from "./container/users/new_user_container";
 import Login from "./container/sessions/login_container";
 import Logout from "./container/sessions/logout_container";

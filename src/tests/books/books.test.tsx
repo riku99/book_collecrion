@@ -1,11 +1,11 @@
 import React from "react";
-import { render, fireEvent } from "./test-utils";
+import { render, fireEvent } from "../test-utils";
 import "@testing-library/jest-dom/extend-expect";
 import { createStore } from "redux";
-import reducer from "../reducer";
+import reducer from "../../reducer";
 
-import Books from "../container/books_container";
-import { customState } from "./test-utils";
+import Books from "../../container/books/books_container";
+import { customState } from "../test-utils";
 
 describe("<Books />", () => {
   test("serch-formにkeyword-formがあり、valueが''である", async () => {

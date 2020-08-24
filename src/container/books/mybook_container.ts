@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-import MyBook from "../components/mybook";
-import { getMyBook, deleteMyBook } from "../actions/books_action";
-import { changeRedirectState } from "../actions/redirect_action";
-import { initialState } from "../reducer";
+import MyBook from "../../components/books/mybook";
+import { getMyBook, deleteMyBook } from "../../actions/books_action";
+import { changeRedirectState } from "../../actions/redirect_action";
+import { initialState } from "../../reducer";
 
 const mapStateToProps = (state: initialState) => ({
   mybook: state.myBook,

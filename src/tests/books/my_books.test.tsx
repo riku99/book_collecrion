@@ -1,10 +1,10 @@
 import React from "react";
-import { render } from "./test-utils";
+import { render } from "../test-utils";
 import "@testing-library/jest-dom/extend-expect";
 import { createStore } from "redux";
-import reducer from "../reducer";
+import reducer from "../../reducer";
 
-import MyBooks from "../container/mybooks_container";
+import MyBooks from "../../container/books/mybooks_container";
 
 describe("<MyBooks />", () => {
   test("mybooksプロップスにデータが入れば要素が表示される", async () => {

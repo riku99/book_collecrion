@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
-import { getBooks, registerBooks } from "../actions/books_action";
-import { initialState } from "../reducer";
-import Books from "../components/books";
+import { getBooks, registerBooks } from "../../actions/books_action";
+import { initialState } from "../../reducer";
+import Books from "../../components/books/books";
 
 const mapStateToProps = (state: initialState) => {
   return {
