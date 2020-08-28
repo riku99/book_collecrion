@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const localhost = "http://localhost:4000";
+const origin = "http://localhost:4000";
 
 export const newUserApi = async (params: {
   user: { username: string; password: string; password_confirmation: string };
 }) => {
-  let response = await axios.post(`${localhost}/api/v1/users`, params, {
+  let response = await axios.post(`${origin}/api/v1/users`, params, {
     withCredentials: true,
   });
 

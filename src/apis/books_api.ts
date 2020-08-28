@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const origin = "http://localhost:4000";
+
 export let getGoogleBooksApi = async (keyword: string) => {
   let response = await axios.get(
     `https://www.googleapis.com/books/v1/volumes?q=serch+${keyword}`
@@ -41,7 +43,7 @@ export let registerBookToRailsApi = async (data: {
   memo: string;
 }) => {
   let response = await axios.post(
-    "http://localhost:4000/api/v1/registerBooks",
+    `${origin}/api/v1/registerBooks`,
     {
       book: {
         title: data.title,
@@ -65,7 +67,7 @@ export let registerBookToRailsApi = async (data: {
 };
 
 export let getMyBooksToRailsApi = async () => {
-  let response = await axios.get("http://localhost:4000/api/v1/mybooks", {
+  let response = await axios.get(`${origin}/api/v1/mybooks`, {
     withCredentials: true,
   });
 
@@ -98,7 +100,7 @@ export let getMyBooksToRailsApi = async () => {
 };
 
 export let getMyBookFromRailsApi = async (id: number) => {
-  let response = await axios(`http://localhost:4000/api/v1/mybooks/${id}`, {
+  let response = await axios(`${origin}/api/v1/mybooks/${id}`, {
     withCredentials: true,
   });
 
@@ -120,10 +122,9 @@ export let getMyBookFromRailsApi = async (id: number) => {
 };
 
 export const deleteMyBookToRailsApi = async (id: number) => {
-  let response = await axios.delete(
-    `http://localhost:4000/api/v1/mybooks/${id}`,
-    { withCredentials: true }
-  );
+  let response = await axios.delete(`${origin}/api/v1/mybooks/${id}`, {
+    withCredentials: true,
+  });
 
   if (response.status !== 200) {
     throw new Error("エラーが発生しました");

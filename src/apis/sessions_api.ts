@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const localhost = "http://localhost:4000";
+const origin = "http://localhost:4000";
 
 export const getCurrentUser = async () => {
-  const response = await axios(`${localhost}/api/v1/checkLogin`, {
+  const response = await axios(`${origin}/api/v1/checkLogin`, {
     withCredentials: true,
   });
   return response;
@@ -16,7 +16,7 @@ export const createLogin = async (params: {
     password_confirmation: string;
   };
 }) => {
-  const response = await axios.post(`${localhost}/api/v1/login`, params, {
+  const response = await axios.post(`${origin}/api/v1/login`, params, {
     withCredentials: true,
   });
 
@@ -34,5 +34,5 @@ export const createLogin = async (params: {
 };
 
 export const doLogout = async () => {
-  await axios.delete(`${localhost}/api/v1/logout`, { withCredentials: true });
+  await axios.delete(`${origin}/api/v1/logout`, { withCredentials: true });
 };
