@@ -14,7 +14,7 @@ const MyBook: FC<MyBookStateAndDispatchType & RouteComponentProps> = ({
   deleteMyBook,
   changeRedirectState,
 }) => {
-  let { id } = useParams();
+  const { id } = useParams<any>();
   const [loading, changeLoading] = useState(true);
   const firstRender = useRef(true);
 
