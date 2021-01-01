@@ -4,6 +4,8 @@ Reactの勉強として作成したもの。
 
 メモしたい本のデータをGoogle Books APIから取得し、保存できる。
 
+テストにJest, React Testing Libraryを使用
+
 ## Available Scripts
 
 In the project directory, you can run:
